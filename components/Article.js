@@ -114,3 +114,48 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+const articles = document.querySelector(".articles"); //based off the guided project, not sure if/why I need it
+
+function articleMaker(articleObj) {
+  const article = document.createElement("div");
+  const title = document.createElement("h2");
+  const date = document.createElement("p");
+  const para1 = document.createElement("p");
+  const para2 = document.createElement("p");
+  const para3 = document.createElement("p");
+  const expandButton = document.createElement("span");
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(para1);
+  article.appendChild(para2);
+  article.appendChild(para3);
+  article.appendChild(expandButton);
+
+  article.classList.add("article");
+  date.classList.add("date");
+  expandButton.classList.add("expandButton");
+
+  title.textContent = articleObj.title;
+  date.textContent = articleObj.date;
+  para1.textContent = articleObj.firstParagraph;
+  para2.textContent = articleObj.secondParagraph;
+  para3.textContent = articleObj.thirdParagraph;
+  expandButton.textContent = "+";
+
+  expandButton.addEventListener("click", e => {
+    article.classList.toggle("article-open");
+  });
+
+  return article;
+
+}
+
+const articleElements = data.map((articleItem) => {
+  return articleMaker(articleItem);
+});
+// console.log(articleElements);
+
+articleElements.forEach((articleElement) => { //data hydration!!
+  articles.appendChild(articleElement);
+});
